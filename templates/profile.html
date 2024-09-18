@@ -6,26 +6,26 @@
 </head>
 <body>
 <h1> create profile</h1>
-<form action="" method="POST">
-  {% csrf_token%}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
   <label for="">name</label>
   <input type="text" name="user">
+    <br>
+    <br>
    <label for="">bio</label>
   <input type="text" name="bio">
-   <label for="">pic</label>
-  <input type="image" name="picture">
-  <input type="submit" value="submit">
+    <br>
+    <br>
+   <label for="">image</label>
+  <input type="file" id="imageUpload" name="image"  />
+    <br>
+    <input type="submit">
 </form>
 
 <br>
 <h1> list profile</h1>
 {% for profile in profiles %}
-
-{{profile.user}}
-{{profile.bio}}
-{{profile.pic}}
-
-
-{% endfor %}
+            <li>{{ profile.user }} - {{ profile.bio }} - <img src="{{ profile.image.url }}" alt="{{ profile.user }}" style="width:100px;height:auto;"></li>
+        {% endfor %}
 </body>
 </html>

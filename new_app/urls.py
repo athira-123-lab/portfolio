@@ -1,10 +1,11 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path("",views.createProfile),
-    path('listprofile/',views.listProfile),
-    path('index',views.index)
 
+    path('index',views.index),
 
+    path('listprofile/',views.listProfile,name='listprofile'),
 ]

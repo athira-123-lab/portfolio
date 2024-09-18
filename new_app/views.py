@@ -1,19 +1,21 @@
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from .models import Profile
 
+
 def createProfile(request):
-    profiles = Profile.objects.all()
-    if request.method=='POST':
-        user=request.POST.get('user')
+    if request.method == 'POST':
+        user = request.POST.get('user')
         bio = request.POST.get('bio')
-        pic= request.POST.get('image')
+        image = request.FILES.get('image')
 
-        profile=Profile(user=user,bio=bio,pic=pic)
+        Profile.objects.create(user=user, bio=bio, image=image)
 
-        profile.save()
-    return render(request,'profile.html',{'profiles':profiles})
+        return redirect('listprofile')
+
+    profiles = Profile.objects.all()
+    return render(request, 'profile.html', {'profiles': profiles})
 
 def listProfile(request):
     profiles=Profile.objects.all()
@@ -22,3 +24,4 @@ def listProfile(request):
 
 def index(request):
     return render(request,'index.html')
+
